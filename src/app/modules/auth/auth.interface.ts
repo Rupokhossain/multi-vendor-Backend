@@ -25,3 +25,22 @@ export interface ILoginResponse {
     avatar?: string | null;
   };
 }
+
+
+export interface IVerifyEmailPayload {
+  email: string;
+  otp: string;
+}
+
+
+export interface IForgotPasswordPayload {
+  email: string;
+}
+export interface IResetPasswordPayload {
+  email: string;
+  otp: string;
+  newPassword: string;
+}
+export interface IGoogleLoginPayload {
+  idToken: string;
+}

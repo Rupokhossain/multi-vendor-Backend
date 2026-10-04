@@ -105,3 +105,11 @@ export const BannerPosition = {
 } as const
 
 export type BannerPosition = (typeof BannerPosition)[keyof typeof BannerPosition]
+
+
+export const AuthProvider = {
+  CREDENTIAL: 'CREDENTIAL',
+  GOOGLE: 'GOOGLE'
+} as const
+
+export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]

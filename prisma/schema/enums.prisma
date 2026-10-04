@@ -65,3 +65,9 @@ enum BannerPosition {
   PROMOTIONAL_GRID
   POPUP
 }
+
+
+enum AuthProvider {
+  CREDENTIAL
+  GOOGLE
+}

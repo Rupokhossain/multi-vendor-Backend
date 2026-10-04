@@ -5,6 +5,8 @@ model User {
   passwordHash String
   role         Role        @default(CUSTOMER)
   status       UserStatus  @default(ACTIVE)
+  emailVerified Boolean      @default(false)  
+  authProvider  AuthProvider @default(CREDENTIAL)
   phone        String?
   avatar       String?
   store        Store?

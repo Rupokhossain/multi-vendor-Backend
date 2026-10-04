@@ -32,4 +32,28 @@ router.get(
   authController.getMyProfile
 );
 
+
+router.post(
+  '/google-login',
+  validateRequest(authValidation.googleLoginValidationSchema),
+  authController.googleLogin
+);
+
+
+router.post(
+  '/verify-email',
+  validateRequest(authValidation.verifyEmailValidationSchema),
+  authController.verifyEmail
+);
+router.post(
+  '/forgot-password',
+  validateRequest(authValidation.forgotPasswordValidationSchema),
+  authController.forgotPassword
+);
+router.post(
+  '/reset-password',
+  validateRequest(authValidation.resetPasswordValidationSchema),
+  authController.resetPassword
+);
+
 export const authRoutes = router;
