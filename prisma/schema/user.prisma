@@ -1,0 +1,20 @@
+model User {
+  id           String      @id @default(uuid())
+  name         String
+  email        String      @unique
+  passwordHash String
+  role         Role        @default(CUSTOMER)
+  status       UserStatus  @default(ACTIVE)
+  phone        String?
+  avatar       String?
+  store        Store?
+  orders       Order[]
+  addresses    Address[]
+  reviews      Review[]
+  cart         Cart?
+  wishlist     Wishlist?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@map("users")
+}

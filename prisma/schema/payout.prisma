@@ -1,0 +1,14 @@
+model PayoutRequest {
+  id            String       @id @default(uuid())
+  storeId       String
+  store         Store        @relation(fields: [storeId], references: [id])
+  amount        Float
+  status        PayoutStatus @default(PENDING)
+  paymentMethod String       // Bank Transfer / bKash
+  accountInfo   String
+  adminNotes    String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@map("payout_requests")
+}

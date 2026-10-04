@@ -1,0 +1,20 @@
+model Order {
+  id              String        @id @default(uuid())
+  orderNumber     String        @unique
+  customerId      String
+  customer        User          @relation(fields: [customerId], references: [id])
+  totalAmount     Float
+  shippingAmount  Float         @default(0.0)
+  taxAmount       Float         @default(0.0)
+  discountAmount  Float         @default(0.0)
+  status          OrderStatus   @default(PENDING)
+  paymentMethod   PaymentMethod @default(COD)
+  paymentStatus   PaymentStatus @default(PENDING)
+  shippingAddress Json
+  subOrders       SubOrder[]    // ভেন্ডরদের স্প্লিট সাব-অর্ডার
+  payment         Payment?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("orders")
+}

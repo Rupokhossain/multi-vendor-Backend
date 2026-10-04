@@ -1,0 +1,22 @@
+model Store {
+  id                 String             @id @default(uuid())
+  userId             String             @unique
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name               String
+  slug               String             @unique
+  logo               String?
+  banner             String?
+  description        String?            @db.Text
+  verificationStatus VerificationStatus @default(PENDING)
+  tradeLicense       String?
+  commissionRate     Float?             // স্পেশাল কমিশন (নাল থাকলে গ্লোবাল রেট)
+  walletBalance      Float              @default(0.0)
+  pendingBalance     Float              @default(0.0)
+  products           Product[]
+  subOrders          SubOrder[]
+  payouts            PayoutRequest[]
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  @@map("stores")
+}

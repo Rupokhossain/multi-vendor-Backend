@@ -1,0 +1,18 @@
+model SubOrder {
+  id             String         @id @default(uuid())
+  orderId        String
+  order          Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  storeId        String
+  store          Store          @relation(fields: [storeId], references: [id])
+  subTotal       Float
+  platformFee    Float          // প্ল্যাটফর্ম কমিশন
+  vendorEarnings Float          // ভেন্ডরের মোট প্রাপ্য
+  status         SubOrderStatus @default(PENDING)
+  trackingNumber String?
+  courierName    String?
+  items          OrderItem[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@map("sub_orders")
+}

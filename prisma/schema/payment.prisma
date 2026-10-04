@@ -1,0 +1,14 @@
+model Payment {
+  id            String        @id @default(uuid())
+  orderId       String        @unique
+  order         Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  transactionId String?       @unique
+  amount        Float
+  method        PaymentMethod
+  status        PaymentStatus @default(PENDING)
+  rawResponse   Json?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("payments")
+}

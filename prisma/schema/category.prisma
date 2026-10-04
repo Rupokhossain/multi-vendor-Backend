@@ -1,0 +1,14 @@
+model Category {
+  id        String     @id @default(uuid())
+  name      String
+  slug      String     @unique
+  icon      String?
+  parentId  String?
+  parent    Category?  @relation("CategoryToSub", fields: [parentId], references: [id], onDelete: Cascade)
+  children  Category[] @relation("CategoryToSub")
+  products  Product[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@map("categories")
+}
