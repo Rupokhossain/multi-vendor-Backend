@@ -7,15 +7,33 @@ import config from "../../config";
 
 const register = catchAsync(async (req: Request, res: Response) => {
   const result = await authService.registerUser(req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: result.message, // "Verification OTP sent to your email!"
+    data: null,
+  });
+});
+
+const verifyEmail = catchAsync(async (req: Request, res: Response) => {
+  const result = await authService.verifyEmail(req.body);
+
+  res.cookie('refreshToken', result.refreshToken, {
+    secure: config.node_env === 'production',
+    httpOnly: true,
+    sameSite: 'none',
+  });
 
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
-    message: "User registered successfully!",
-    data: result,
+    message: 'Email verified & account activated successfully!',
+    data: {
+      accessToken: result.accessToken,
+      user: result.user,
+    },
   });
 });
-
 const login = catchAsync(async (req: Request, res: Response) => {
   const result = await authService.loginUser(req.body);
 
@@ -80,15 +98,7 @@ const googleLogin = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const verifyEmail = catchAsync(async (req: Request, res: Response) => {
-  const result = await authService.verifyEmail(req.body);
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: result.message,
-    data: null,
-  });
-});
+
 
 const forgotPassword = catchAsync(async (req: Request, res: Response) => {
   const result = await authService.forgotPassword(req.body);

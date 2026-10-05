@@ -19,32 +19,102 @@ import { redisClient } from "../../lib/redis";
 import path from "path";
 import ejs from "ejs";
 import { transporter } from "../../lib/nodemailer";
+import { AuthProvider, Role, UserStatus } from "../../../generated/prisma/enums";
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-// ১. ইউজার রেজিস্ট্রেশন
+
+// ১. রেজিস্ট্রেশন রিকোয়েস্ট (ডাটাবেজে সেভ হবে না, OTP ও ডাটা Redis-এ ৫ মিনিটের জন্য থাকবে)
 const registerUser = async (payload: IRegisterUserPayload) => {
+  const { name, password, phone, role } = payload;
+  const email = payload.email.trim().toLowerCase();
+
   const isUserExist = await prisma.user.findUnique({
-    where: { email: payload.email },
+    where: { email },
   });
 
   if (isUserExist) {
-    throw new AppError(
-      httpStatus.CONFLICT,
-      "User with this email already exists!",
-    );
+    throw new AppError(httpStatus.CONFLICT, 'User with this email already exists!');
   }
 
-  // পাসওয়ার্ড হ্যাশিং
   const saltRounds = Number(config.bcrypt_salt_rounds) || 12;
-  const passwordHash = await bcrypt.hash(payload.password, saltRounds);
+  const passwordHash = await bcrypt.hash(password, saltRounds);
 
+  // ৬ ডিজিটের ওটিপি তৈরি
+  const otp = crypto.randomInt(100000, 1000000).toString();
+  const expirationSeconds = 5 * 60; // ৫ মিনিট
+
+  console.log(`\n🔑 [DEV OTP] Verification OTP for ${email}: 👉 ${otp} 👈\n`);
+
+  // Redis-এ OTP রাখা
+  await redisClient.set(`verify-email-otp:${email}`, otp, { EX: expirationSeconds });
+
+  // Redis-এ ইউজারের সাইন-আপ ডাটা রাখা
+  await redisClient.set(
+    `user-registration-data:${email}`,
+    JSON.stringify({ name, email, passwordHash, phone, role }),
+    { EX: expirationSeconds }
+  );
+
+  // ইমেইলে OTP পাঠানো
+  try {
+    const templatePath = path.join(process.cwd(), 'src/app/templates/registration-user-otp.ejs');
+    const html = await ejs.renderFile(templatePath, {
+      name,
+      email,
+      otp,
+      expirationSeconds: 5,
+    });
+
+    await transporter.sendMail({
+      from: config.email_sender || 'no-reply@nexusmarket.com',
+      to: email,
+      subject: 'Verify Your Email - Nexus Market',
+      html,
+    });
+  } catch (err) {
+    console.log('Nodemailer error (ignored in dev):', err);
+  }
+
+  return { message: 'Verification OTP sent to your email!' };
+};
+
+// ২. OTP ভেরিফাই করে আসল ইউজার ডাটাবেজে তৈরি করা
+const verifyEmail = async (payload: IVerifyEmailPayload) => {
+  const { email, otp } = payload;
+  const normalizedEmail = email.trim().toLowerCase();
+
+  const otpKey = `verify-email-otp:${normalizedEmail}`;
+  const redisOtp = await redisClient.get(otpKey);
+
+  if (!redisOtp) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'OTP has expired or is invalid!');
+  }
+
+  if (redisOtp !== otp) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'OTP does not match!');
+  }
+
+  // Redis থেকে ক্যাশ করা সাইন-আপ ডাটা আনা
+  const registrationDataKey = `user-registration-data:${normalizedEmail}`;
+  const redisData = await redisClient.get(registrationDataKey);
+
+  if (!redisData) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Registration session expired. Please register again.');
+  }
+
+  const userData = JSON.parse(redisData);
+
+  // ডাটাবেজে আসল ইউজার তৈরি (emailVerified: true)
   const newUser = await prisma.user.create({
     data: {
-      name: payload.name,
-      email: payload.email,
-      passwordHash,
-      phone: payload.phone,
-      role: payload.role || "CUSTOMER",
+      name: userData.name,
+      email: userData.email,
+      passwordHash: userData.passwordHash,
+      phone: userData.phone,
+      role: userData.role || Role.CUSTOMER,
+      emailVerified: true,
+      authProvider: AuthProvider.CREDENTIAL,
+      status: UserStatus.ACTIVE,
     },
     select: {
       id: true,
@@ -53,13 +123,51 @@ const registerUser = async (payload: IRegisterUserPayload) => {
       role: true,
       phone: true,
       avatar: true,
-      status: true,
-      createdAt: true,
+      emailVerified: true,
     },
   });
 
-  return newUser;
+  // Redis ডাটা ক্লিন করা
+  await redisClient.del([otpKey, registrationDataKey]);
+
+  // ওয়েলকাম ইমেইল পাঠানো
+  try {
+    const templatePath = path.join(process.cwd(), 'src/app/templates/welcome-email.ejs');
+    const html = await ejs.renderFile(templatePath, { name: newUser.name });
+
+    await transporter.sendMail({
+      from: config.email_sender,
+      to: normalizedEmail,
+      subject: 'Welcome To Nexus Market! 🎉',
+      html,
+    });
+  } catch (err) {
+    console.log('Welcome mail error:', err);
+  }
+
+  // স্বয়ংক্রিয়ভাবে লগইন টোকেন জেনারেট
+  const jwtPayload = {
+    userId: newUser.id,
+    name: newUser.name,
+    email: newUser.email,
+    role: newUser.role,
+  };
+
+  const accessToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_access_secret,
+    config.jwt_access_expires_in as any
+  );
+
+  const refreshToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_refresh_secret,
+    config.jwt_refresh_expires_in as any
+  );
+
+  return { user: newUser, accessToken, refreshToken };
 };
+
 
 // ২. ইউজার লগইন
 const loginUser = async (
@@ -181,28 +289,6 @@ const getMyProfile = async (userId: string) => {
 
   const { passwordHash, ...userWithoutPassword } = user;
   return userWithoutPassword;
-};
-
-const verifyEmail = async (payload: IVerifyEmailPayload) => {
-  const { email, otp } = payload;
-  const key = `verify-email-otp:${email.trim().toLowerCase()}`;
-  const redisOtp = await redisClient.get(key);
-  if (!redisOtp) {
-    throw new AppError(
-      httpStatus.BAD_REQUEST,
-      "OTP has expired or is invalid!",
-    );
-  }
-  if (redisOtp !== otp) {
-    throw new AppError(httpStatus.BAD_REQUEST, "OTP does not match!");
-  }
-  // ডাটাবেজে ইউজার ভেরিফায়েড করে দেওয়া
-  const updatedUser = await prisma.user.update({
-    where: { email: email.trim().toLowerCase() },
-    data: { emailVerified: true },
-  });
-  await redisClient.del(key);
-  return { message: "Email verified successfully! You can now log in." };
 };
 
 const forgotPassword = async (payload: IForgotPasswordPayload) => {
