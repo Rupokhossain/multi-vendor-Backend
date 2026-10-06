@@ -1,7 +1,7 @@
 import { Role, VerificationStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { AppError } from "../../utils/AppError";
-import { paginationHelper } from "../../utils/paginationHelper";
+import { calculatePagination } from "../../utils/paginationHelper";
 import { ICreateStorePayload, IStoreFilterRequest, IUpdateStorePayload } from "./store.interface";
 import httpStatus from 'http-status';
 
@@ -117,7 +117,7 @@ const getStoreBySlug = async (slug: string) => {
 
 // ৫. সমস্ত স্টোরের তালিকা (ফিল্টারিং ও পেজিনেশনসহ)
 const getAllStores = async (filters: IStoreFilterRequest, options: any) => {
-  const { page, limit, skip, sortBy, sortOrder } = paginationHelper.calculatePagination(options);
+  const { page, limit, skip, sortBy, sortOrder } = calculatePagination(options);
   const { searchTerm, verificationStatus } = filters;
   const andConditions: any[] = [];
   // সার্চ টার্ম থাকলে নাম বা স্লাগে খুঁজবে

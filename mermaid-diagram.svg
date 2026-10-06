@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1062.058 388" width="1062.058" height="388" style="--bg:#1F1F1F;--fg:#CCCCCC;--line:#CCCCCC;--accent:#0078D4;--muted:#CCCCCCCC;--surface:#181818;--border:#CCCCCC;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', ui-monospace, monospace; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+</defs>
+<polyline class="er-relationship" data-entity1="STORE" data-entity2="PRODUCT" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="owns" points="180,320 353.802,320 353.802,252 433.802,252" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="CATEGORY" data-entity2="PRODUCT" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="classifies" points="180,194 433.802,194" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="BRAND" data-entity2="PRODUCT" data-cardinality1="zero-one" data-cardinality2="zero-many" data-identifying="true" data-label="manufactures" points="180,68 353.802,68 353.802,136 433.802,136" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="PRODUCT" data-entity2="PRODUCT_VARIANT" data-cardinality1="one" data-cardinality2="many" data-identifying="true" data-label="has variants" points="607.002,194 855.458,194" fill="none" stroke="var(--_line)" stroke-width="1" />
+<g class="entity" data-id="STORE" data-label="STORE">
+  <rect x="40" y="292" width="140" height="56" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="40" y="292" width="140" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="110" y="309" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">STORE</text>
+  <line x1="40" y1="326" x2="180" y2="326" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="110" y="337" text-anchor="middle" dy="0.35em" font-size="11" fill="var(--_text-faint)" font-style="italic">(no attributes)</text>
+</g>
+<g class="entity" data-id="PRODUCT" data-label="PRODUCT">
+  <rect x="433.802" y="78" width="173.2" height="232" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="433.802" y="78" width="173.2" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="520.402" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">PRODUCT</text>
+  <line x1="433.802" y1="112" x2="607.002" y2="112" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="439.802" y="116" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="450.957" y="123" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="470.112" y="123" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="599.002" y="123" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="439.802" y="138" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="450.957" y="145" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="470.112" y="145" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="599.002" y="145" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">storeId</tspan></text>
+  <rect x="439.802" y="160" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="450.957" y="167" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="470.112" y="167" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="599.002" y="167" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">categoryId</tspan></text>
+  <rect x="439.802" y="182" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="450.957" y="189" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="470.112" y="189" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="599.002" y="189" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">brandId</tspan></text>
+  <text x="441.802" y="211" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="599.002" y="211" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">title</tspan></text>
+  <text x="441.802" y="233" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="599.002" y="233" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">slug</tspan></text>
+  <text x="441.802" y="255" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="599.002" y="255" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">description</tspan></text>
+  <text x="441.802" y="277" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string[]</tspan></text>
+  <text x="599.002" y="277" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">images</tspan></text>
+  <text x="441.802" y="299" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">boolean</tspan></text>
+  <text x="599.002" y="299" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">isPublished</tspan></text>
+</g>
+<g class="entity" data-id="CATEGORY" data-label="CATEGORY">
+  <rect x="40" y="166" width="140" height="56" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="40" y="166" width="140" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="110" y="183" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">CATEGORY</text>
+  <line x1="40" y1="200" x2="180" y2="200" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="110" y="211" text-anchor="middle" dy="0.35em" font-size="11" fill="var(--_text-faint)" font-style="italic">(no attributes)</text>
+</g>
+<g class="entity" data-id="BRAND" data-label="BRAND">
+  <rect x="40" y="40" width="140" height="56" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="40" y="40" width="140" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="110" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">BRAND</text>
+  <line x1="40" y1="74" x2="180" y2="74" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="110" y="85" text-anchor="middle" dy="0.35em" font-size="11" fill="var(--_text-faint)" font-style="italic">(no attributes)</text>
+</g>
+<g class="entity" data-id="PRODUCT_VARIANT" data-label="PRODUCT_VARIANT">
+  <rect x="855.458" y="111" width="166.6" height="166" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="855.458" y="111" width="166.6" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="938.7579999999999" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">PRODUCT_VARIANT</text>
+  <line x1="855.458" y1="145" x2="1022.058" y2="145" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="861.458" y="149" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="872.6129999999999" y="156" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="891.7679999999999" y="156" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1014.058" y="156" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="861.458" y="171" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="872.6129999999999" y="178" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="891.7679999999999" y="178" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1014.058" y="178" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">productId</tspan></text>
+  <rect x="861.458" y="193" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="872.6129999999999" y="200" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">UK</text>
+  <text x="891.7679999999999" y="200" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1014.058" y="200" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">sku</tspan></text>
+  <text x="863.458" y="222" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">float</tspan></text>
+  <text x="1014.058" y="222" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">price</tspan></text>
+  <text x="863.458" y="244" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1014.058" y="244" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">stock</tspan></text>
+  <g><title>e.g. {&#39;size&#39;: 42, &#39;color&#39;: &#39;Black&#39;}</title>
+  <text x="863.458" y="266" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">json</tspan></text>
+  <text x="1014.058" y="266" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">attributes</tspan></text>
+  </g>
+</g>
+<line x1="184" y1="314" x2="184" y2="326" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="188" y1="314" x2="188" y2="326" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="429.802" y1="259" x2="417.802" y2="252" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="429.802" y1="252" x2="417.802" y2="252" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="429.802" y1="245" x2="417.802" y2="252" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="413.802" cy="252" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="184" y1="188" x2="184" y2="200" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="188" y1="188" x2="188" y2="200" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="429.802" y1="201" x2="417.802" y2="194" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="429.802" y1="194" x2="417.802" y2="194" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="429.802" y1="187" x2="417.802" y2="194" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="413.802" cy="194" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="184" y1="62" x2="184" y2="74" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="188" y1="62" x2="188" y2="74" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="192" cy="68" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="429.802" y1="143" x2="417.802" y2="136" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="429.802" y1="136" x2="417.802" y2="136" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="429.802" y1="129" x2="417.802" y2="136" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="413.802" cy="136" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="611.002" y1="188" x2="611.002" y2="200" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="615.002" y1="188" x2="615.002" y2="200" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="851.458" y1="201" x2="839.458" y2="194" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="851.458" y1="194" x2="839.458" y2="194" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="851.458" y1="187" x2="839.458" y2="194" stroke="var(--_line)" stroke-width="1.25" />
+<rect x="323.60200000000003" y="309.85" width="34.598" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="340.901" y="320" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">owns</text>
+<rect x="279.504" y="183.85" width="54.79400000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="306.901" y="194" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">classifies</text>
+<rect x="304" y="57.85" width="73.80200000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="340.901" y="68" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">manufactures</text>
+<rect x="697.0020000000001" y="183.85" width="68.456" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="731.23" y="194" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">has variants</text>
+</svg>

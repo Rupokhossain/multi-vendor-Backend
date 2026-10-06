@@ -1,19 +1,15 @@
-type IOptions = {
-  page?: number;
-  limit?: number;
-  sortBy?: string;
-  sortOrder?: 'asc' | 'desc';
-};
+import { IPaginationOptions } from "../interface/pagination";
 
-type IOptionsResult = {
+
+interface IOptionsResult {
   page: number;
   limit: number;
   skip: number;
   sortBy: string;
   sortOrder: 'asc' | 'desc';
-};
+}
 
-const calculatePagination = (options: IOptions): IOptionsResult => {
+export const calculatePagination = (options: IPaginationOptions): IOptionsResult => {
   const page = Number(options.page || 1);
   const limit = Number(options.limit || 10);
   const skip = (page - 1) * limit;
@@ -28,8 +24,4 @@ const calculatePagination = (options: IOptions): IOptionsResult => {
     sortBy,
     sortOrder,
   };
-};
-
-export const paginationHelper = {
-  calculatePagination,
 };
