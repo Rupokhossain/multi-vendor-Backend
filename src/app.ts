@@ -5,6 +5,8 @@ import { authRoutes } from './app/modules/auth/auth.route';
 import { globalErrorHandler } from './app/middlewares/globalErrorHandler';
 import { notFound } from './app/middlewares/notFound';
 import { storeRoutes } from './app/modules/store/store.route';
+import { categoryRoutes } from './app/modules/category/category.route';
+import { brandRoutes } from './app/modules/brand/brand.route';
 
 const app: Application = express();
 
@@ -16,6 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/stores", storeRoutes);
+app.use("/api/v1/categories", categoryRoutes);
+app.use("/api/v1/brands", brandRoutes);
+
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).json({
