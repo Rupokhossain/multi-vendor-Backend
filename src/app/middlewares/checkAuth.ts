@@ -9,6 +9,7 @@ import { prisma } from "../lib/prisma";
 import { jwtUtils } from "../utils/jwt";
 
 export interface RequestUser {
+  [x: string]: string;
   email: string;
   name: string;
   userId: string;

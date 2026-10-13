@@ -11,6 +11,7 @@ import { productRoutes } from './app/modules/product/product.route';
 import { cartRoutes } from './app/modules/cart/cart.route';
 import { orderRoutes } from './app/modules/order/order.route';
 import { ReviewRoutes } from './app/modules/review/review.route';
+import { PayoutRoutes } from './app/modules/payout/payout.route';
 
 const app: Application = express();
 
@@ -28,6 +29,7 @@ app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/reviews", ReviewRoutes);
+app.use("/api/v1/payouts", PayoutRoutes);
 
 
 app.get('/', (req: Request, res: Response) => {
