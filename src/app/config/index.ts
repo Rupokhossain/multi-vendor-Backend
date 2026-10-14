@@ -27,4 +27,13 @@ export default {
   cloudinary_api_key: process.env.CLOUDINARY_API_KEY!,
   cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET!,
 
+
+  storeId: process.env.SSL_STORE_ID || 'testbox'!,
+  storePasswd: process.env.SSL_STORE_PASSWD || 'qwerty'!,
+  isLive: process.env.SSL_IS_LIVE === 'true'!,
+  successUrl: process.env.SSL_SUCCESS_URL!,
+  failUrl: process.env.SSL_FAIL_URL!,
+  cancelUrl: process.env.SSL_CANCEL_URL!,
+  ipnUrl: process.env.SSL_IPN_URL!,
+
 };

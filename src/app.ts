@@ -14,6 +14,7 @@ import { ReviewRoutes } from './app/modules/review/review.route';
 import { PayoutRoutes } from './app/modules/payout/payout.route';
 import { CouponRoutes } from './app/modules/coupon/coupon.route';
 import { WishlistRoutes } from './app/modules/wishlist/wishlist.route';
+import { PaymentRoutes } from './app/modules/payment/payment.route';
 
 const app: Application = express();
 
@@ -34,6 +35,7 @@ app.use("/api/v1/reviews", ReviewRoutes);
 app.use("/api/v1/payouts", PayoutRoutes);
 app.use("/api/v1/coupons", CouponRoutes);
 app.use("/api/v1/wishlists", WishlistRoutes);
+app.use("/api/v1/payments", PaymentRoutes);
 
 
 app.get('/', (req: Request, res: Response) => {
