@@ -15,6 +15,7 @@ import { PayoutRoutes } from './app/modules/payout/payout.route';
 import { CouponRoutes } from './app/modules/coupon/coupon.route';
 import { WishlistRoutes } from './app/modules/wishlist/wishlist.route';
 import { PaymentRoutes } from './app/modules/payment/payment.route';
+import { AnalyticsRoutes } from './app/modules/analytics/analytics.route';
 
 const app: Application = express();
 
@@ -36,6 +37,7 @@ app.use("/api/v1/payouts", PayoutRoutes);
 app.use("/api/v1/coupons", CouponRoutes);
 app.use("/api/v1/wishlists", WishlistRoutes);
 app.use("/api/v1/payments", PaymentRoutes);
+app.use("/api/v1/analytics", AnalyticsRoutes);
 
 
 app.get('/', (req: Request, res: Response) => {
