@@ -443,6 +443,74 @@ const googleLogin = async (idToken: string) => {
   };
 };
 
+const updateProfile = async (
+  userId: string,
+  payload: { name?: string; phone?: string; avatar?: string },
+) => {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User not found!');
+  }
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+    data: payload,
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      avatar: true,
+      role: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+  return updatedUser;
+};
+
+// ২. ওল্ড পাসওয়ার্ড যাচাই করে পাসওয়ার্ড পরিবর্তন করা
+const changePassword = async (
+  userId: string,
+  payload: { oldPassword: string; newPassword: string },
+) => {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User not found!');
+  }
+  // যদি গুগল দিয়ে লগইন করা ইউজার হয় যার পাসওয়ার্ড নেই
+  if (!user.passwordHash) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      'You logged in using Google. Please use forgot-password to set a password first!',
+    );
+  }
+  // ওল্ড পাসওয়ার্ড মিলছে কি না চেক
+  const isPasswordMatched = await bcrypt.compare(
+    payload.oldPassword,
+    user.passwordHash,
+  );
+  if (!isPasswordMatched) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      'Current password does not match!',
+    );
+  }
+  // নতুন পাসওয়ার্ড হ্যাশ করে আপডেট করা
+  const saltRounds = Number(config.bcrypt_salt_rounds) || 12;
+  const newPasswordHash = await bcrypt.hash(payload.newPassword, saltRounds);
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      passwordHash: newPasswordHash,
+    },
+  });
+  return { message: 'Password changed successfully!' };
+};
+
 export const authService = {
   registerUser,
   loginUser,
@@ -452,4 +520,6 @@ export const authService = {
   verifyEmail,
   forgotPassword,
   resetPassword,
+  updateProfile,
+  changePassword
 };

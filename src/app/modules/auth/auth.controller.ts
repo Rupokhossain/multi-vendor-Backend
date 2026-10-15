@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation> */
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { catchAsync } from "../../utils/catchAsync";
@@ -98,8 +99,6 @@ const googleLogin = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-
-
 const forgotPassword = catchAsync(async (req: Request, res: Response) => {
   const result = await authService.forgotPassword(req.body);
   sendResponse(res, {
@@ -120,6 +119,30 @@ const resetPassword = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateProfile = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user as any;
+  const userId = user?.id || user?.userId;
+  const result = await authService.updateProfile(userId, req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Profile updated successfully!',
+    data: result,
+  });
+});
+
+const changePassword = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user as any;
+  const userId = user?.id || user?.userId;
+  const result = await authService.changePassword(userId, req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: result.message,
+    data: null,
+  });
+});
+
 export const authController = {
   register,
   login,
@@ -129,4 +152,6 @@ export const authController = {
   verifyEmail,
   forgotPassword,
   resetPassword,
+  updateProfile,
+  changePassword
 };

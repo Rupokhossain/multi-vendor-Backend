@@ -56,4 +56,21 @@ router.post(
   authController.resetPassword
 );
 
+
+// প্রোফাইল আপডেট (যেকোনো লগইন করা ইউজার)
+router.patch(
+  '/update-profile',
+  auth(Role.CUSTOMER, Role.VENDOR, Role.STAFF, Role.SUPER_ADMIN),
+  validateRequest(authValidation.updateProfileValidationSchema),
+  authController.updateProfile
+);
+
+// পাসওয়ার্ড চেঞ্জ (যেকোনো লগইন করা ইউজার)
+router.post(
+  '/change-password',
+  auth(Role.CUSTOMER, Role.VENDOR, Role.STAFF, Role.SUPER_ADMIN),
+  validateRequest(authValidation.changePasswordValidationSchema),
+  authController.changePassword
+);
+
 export const authRoutes = router;

@@ -69,6 +69,47 @@ const resetPasswordValidationSchema = z.object({
   }),
 });
 
+
+const updateProfileValidationSchema = z.object({
+  body: z
+    .object({
+      name: z
+        .string()
+        .min(2, 'Name must be at least 2 characters')
+        .optional(),
+
+      phone: z
+        .string()
+        .min(10, 'Phone must be at least 10 characters')
+        .optional(),
+
+      avatar: z
+        .string()
+        .url('Invalid avatar URL')
+        .optional(),
+    })
+    .refine(
+      (data) => Object.values(data).some((value) => value !== undefined),
+      {
+        message: 'At least one field is required to update profile',
+      },
+    ),
+});
+
+const changePasswordValidationSchema = z.object({
+  body: z.object({
+    oldPassword: z
+      .string()
+      .min(1, 'Current password is required'),
+
+    newPassword: z
+      .string()
+      .min(1, 'New password is required')
+      .min(6, 'New password must be at least 6 characters'),
+  }),
+});
+
+
 export const authValidation = {
   registerValidationSchema,
   loginValidationSchema,
@@ -77,4 +118,6 @@ export const authValidation = {
   verifyEmailValidationSchema,
   forgotPasswordValidationSchema,
   resetPasswordValidationSchema,
+  updateProfileValidationSchema,
+  changePasswordValidationSchema
 };
