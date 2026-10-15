@@ -19,6 +19,7 @@ import { AnalyticsRoutes } from './app/modules/analytics/analytics.route';
 import { AddressRoutes } from './app/modules/address/address.route';
 import { BannerRoutes } from './app/modules/banner/banner.route';
 import { SystemSettingRoutes } from './app/modules/systemSetting/systemSetting.route';
+import { uploadRoutes } from './app/modules/upload/upload.route';
 
 const app: Application = express();
 
@@ -44,6 +45,7 @@ app.use("/api/v1/analytics", AnalyticsRoutes);
 app.use("/api/v1/addresses", AddressRoutes);
 app.use("/api/v1/banners", BannerRoutes);
 app.use("/api/v1/system-settings", SystemSettingRoutes);
+app.use("/api/v1/uploads", uploadRoutes);
 
 
 app.get('/', (req: Request, res: Response) => {
