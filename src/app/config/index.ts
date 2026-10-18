@@ -35,4 +35,9 @@ export default {
   cancelUrl: process.env.SSL_CANCEL_URL!,
   ipnUrl: process.env.SSL_IPN_URL!,
 
+
+  steadfastApiKey: process.env.STEADFAST_API_KEY!,
+  steadfastSecretKey: process.env.STEADFAST_SECRET_KEY!,
+  steadfastBaseUrl: process.env.STEADFAST_BASE_URL || 'https://portal.steadfast.com.bd/api/v1!',
+
 };

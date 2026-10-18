@@ -5,11 +5,14 @@ model SubOrder {
   storeId        String
   store          Store          @relation(fields: [storeId], references: [id])
   subTotal       Float
-  platformFee    Float          // প্ল্যাটফর্ম কমিশন
-  vendorEarnings Float          // ভেন্ডরের মোট প্রাপ্য
+  platformFee    Float // প্ল্যাটফর্ম কমিশন
+  vendorEarnings Float // ভেন্ডরের মোট প্রাপ্য
   status         SubOrderStatus @default(PENDING)
   trackingNumber String?
   courierName    String?
+  consignmentId  String?
+  courierStatus  String?
+  shippedAt      DateTime?
   items          OrderItem[]
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt

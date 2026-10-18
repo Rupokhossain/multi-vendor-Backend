@@ -319,6 +319,9 @@ export const SubOrderScalarFieldEnum = {
   status: 'status',
   trackingNumber: 'trackingNumber',
   courierName: 'courierName',
+  consignmentId: 'consignmentId',
+  courierStatus: 'courierStatus',
+  shippedAt: 'shippedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

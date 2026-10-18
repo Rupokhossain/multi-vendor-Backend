@@ -48,6 +48,9 @@ export type SubOrderMinAggregateOutputType = {
   status: $Enums.SubOrderStatus | null
   trackingNumber: string | null
   courierName: string | null
+  consignmentId: string | null
+  courierStatus: string | null
+  shippedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -62,6 +65,9 @@ export type SubOrderMaxAggregateOutputType = {
   status: $Enums.SubOrderStatus | null
   trackingNumber: string | null
   courierName: string | null
+  consignmentId: string | null
+  courierStatus: string | null
+  shippedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -76,6 +82,9 @@ export type SubOrderCountAggregateOutputType = {
   status: number
   trackingNumber: number
   courierName: number
+  consignmentId: number
+  courierStatus: number
+  shippedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -104,6 +113,9 @@ export type SubOrderMinAggregateInputType = {
   status?: true
   trackingNumber?: true
   courierName?: true
+  consignmentId?: true
+  courierStatus?: true
+  shippedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -118,6 +130,9 @@ export type SubOrderMaxAggregateInputType = {
   status?: true
   trackingNumber?: true
   courierName?: true
+  consignmentId?: true
+  courierStatus?: true
+  shippedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -132,6 +147,9 @@ export type SubOrderCountAggregateInputType = {
   status?: true
   trackingNumber?: true
   courierName?: true
+  consignmentId?: true
+  courierStatus?: true
+  shippedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -233,6 +251,9 @@ export type SubOrderGroupByOutputType = {
   status: $Enums.SubOrderStatus
   trackingNumber: string | null
   courierName: string | null
+  consignmentId: string | null
+  courierStatus: string | null
+  shippedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: SubOrderCountAggregateOutputType | null
@@ -270,6 +291,9 @@ export type SubOrderWhereInput = {
   status?: Prisma.EnumSubOrderStatusFilter<"SubOrder"> | $Enums.SubOrderStatus
   trackingNumber?: Prisma.StringNullableFilter<"SubOrder"> | string | null
   courierName?: Prisma.StringNullableFilter<"SubOrder"> | string | null
+  consignmentId?: Prisma.StringNullableFilter<"SubOrder"> | string | null
+  courierStatus?: Prisma.StringNullableFilter<"SubOrder"> | string | null
+  shippedAt?: Prisma.DateTimeNullableFilter<"SubOrder"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"SubOrder"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SubOrder"> | Date | string
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
@@ -287,6 +311,9 @@ export type SubOrderOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   trackingNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   courierName?: Prisma.SortOrderInput | Prisma.SortOrder
+  consignmentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  courierStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  shippedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   order?: Prisma.OrderOrderByWithRelationInput
@@ -307,6 +334,9 @@ export type SubOrderWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumSubOrderStatusFilter<"SubOrder"> | $Enums.SubOrderStatus
   trackingNumber?: Prisma.StringNullableFilter<"SubOrder"> | string | null
   courierName?: Prisma.StringNullableFilter<"SubOrder"> | string | null
+  consignmentId?: Prisma.StringNullableFilter<"SubOrder"> | string | null
+  courierStatus?: Prisma.StringNullableFilter<"SubOrder"> | string | null
+  shippedAt?: Prisma.DateTimeNullableFilter<"SubOrder"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"SubOrder"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SubOrder"> | Date | string
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
@@ -324,6 +354,9 @@ export type SubOrderOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   trackingNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   courierName?: Prisma.SortOrderInput | Prisma.SortOrder
+  consignmentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  courierStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  shippedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SubOrderCountOrderByAggregateInput
@@ -346,6 +379,9 @@ export type SubOrderScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumSubOrderStatusWithAggregatesFilter<"SubOrder"> | $Enums.SubOrderStatus
   trackingNumber?: Prisma.StringNullableWithAggregatesFilter<"SubOrder"> | string | null
   courierName?: Prisma.StringNullableWithAggregatesFilter<"SubOrder"> | string | null
+  consignmentId?: Prisma.StringNullableWithAggregatesFilter<"SubOrder"> | string | null
+  courierStatus?: Prisma.StringNullableWithAggregatesFilter<"SubOrder"> | string | null
+  shippedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SubOrder"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SubOrder"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SubOrder"> | Date | string
 }
@@ -358,6 +394,9 @@ export type SubOrderCreateInput = {
   status?: $Enums.SubOrderStatus
   trackingNumber?: string | null
   courierName?: string | null
+  consignmentId?: string | null
+  courierStatus?: string | null
+  shippedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   order: Prisma.OrderCreateNestedOneWithoutSubOrdersInput
@@ -375,6 +414,9 @@ export type SubOrderUncheckedCreateInput = {
   status?: $Enums.SubOrderStatus
   trackingNumber?: string | null
   courierName?: string | null
+  consignmentId?: string | null
+  courierStatus?: string | null
+  shippedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutSubOrderInput
@@ -388,6 +430,9 @@ export type SubOrderUpdateInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   order?: Prisma.OrderUpdateOneRequiredWithoutSubOrdersNestedInput
@@ -405,6 +450,9 @@ export type SubOrderUncheckedUpdateInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutSubOrderNestedInput
@@ -420,6 +468,9 @@ export type SubOrderCreateManyInput = {
   status?: $Enums.SubOrderStatus
   trackingNumber?: string | null
   courierName?: string | null
+  consignmentId?: string | null
+  courierStatus?: string | null
+  shippedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -432,6 +483,9 @@ export type SubOrderUpdateManyMutationInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -446,6 +500,9 @@ export type SubOrderUncheckedUpdateManyInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -475,6 +532,9 @@ export type SubOrderCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   trackingNumber?: Prisma.SortOrder
   courierName?: Prisma.SortOrder
+  consignmentId?: Prisma.SortOrder
+  courierStatus?: Prisma.SortOrder
+  shippedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -495,6 +555,9 @@ export type SubOrderMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   trackingNumber?: Prisma.SortOrder
   courierName?: Prisma.SortOrder
+  consignmentId?: Prisma.SortOrder
+  courierStatus?: Prisma.SortOrder
+  shippedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -509,6 +572,9 @@ export type SubOrderMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   trackingNumber?: Prisma.SortOrder
   courierName?: Prisma.SortOrder
+  consignmentId?: Prisma.SortOrder
+  courierStatus?: Prisma.SortOrder
+  shippedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -621,6 +687,10 @@ export type EnumSubOrderStatusFieldUpdateOperationsInput = {
   set?: $Enums.SubOrderStatus
 }
 
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type SubOrderCreateWithoutOrderInput = {
   id?: string
   subTotal: number
@@ -629,6 +699,9 @@ export type SubOrderCreateWithoutOrderInput = {
   status?: $Enums.SubOrderStatus
   trackingNumber?: string | null
   courierName?: string | null
+  consignmentId?: string | null
+  courierStatus?: string | null
+  shippedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   store: Prisma.StoreCreateNestedOneWithoutSubOrdersInput
@@ -644,6 +717,9 @@ export type SubOrderUncheckedCreateWithoutOrderInput = {
   status?: $Enums.SubOrderStatus
   trackingNumber?: string | null
   courierName?: string | null
+  consignmentId?: string | null
+  courierStatus?: string | null
+  shippedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutSubOrderInput
@@ -688,6 +764,9 @@ export type SubOrderScalarWhereInput = {
   status?: Prisma.EnumSubOrderStatusFilter<"SubOrder"> | $Enums.SubOrderStatus
   trackingNumber?: Prisma.StringNullableFilter<"SubOrder"> | string | null
   courierName?: Prisma.StringNullableFilter<"SubOrder"> | string | null
+  consignmentId?: Prisma.StringNullableFilter<"SubOrder"> | string | null
+  courierStatus?: Prisma.StringNullableFilter<"SubOrder"> | string | null
+  shippedAt?: Prisma.DateTimeNullableFilter<"SubOrder"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"SubOrder"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SubOrder"> | Date | string
 }
@@ -700,6 +779,9 @@ export type SubOrderCreateWithoutItemsInput = {
   status?: $Enums.SubOrderStatus
   trackingNumber?: string | null
   courierName?: string | null
+  consignmentId?: string | null
+  courierStatus?: string | null
+  shippedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   order: Prisma.OrderCreateNestedOneWithoutSubOrdersInput
@@ -716,6 +798,9 @@ export type SubOrderUncheckedCreateWithoutItemsInput = {
   status?: $Enums.SubOrderStatus
   trackingNumber?: string | null
   courierName?: string | null
+  consignmentId?: string | null
+  courierStatus?: string | null
+  shippedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -744,6 +829,9 @@ export type SubOrderUpdateWithoutItemsInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   order?: Prisma.OrderUpdateOneRequiredWithoutSubOrdersNestedInput
@@ -760,6 +848,9 @@ export type SubOrderUncheckedUpdateWithoutItemsInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -772,6 +863,9 @@ export type SubOrderCreateWithoutStoreInput = {
   status?: $Enums.SubOrderStatus
   trackingNumber?: string | null
   courierName?: string | null
+  consignmentId?: string | null
+  courierStatus?: string | null
+  shippedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   order: Prisma.OrderCreateNestedOneWithoutSubOrdersInput
@@ -787,6 +881,9 @@ export type SubOrderUncheckedCreateWithoutStoreInput = {
   status?: $Enums.SubOrderStatus
   trackingNumber?: string | null
   courierName?: string | null
+  consignmentId?: string | null
+  courierStatus?: string | null
+  shippedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutSubOrderInput
@@ -827,6 +924,9 @@ export type SubOrderCreateManyOrderInput = {
   status?: $Enums.SubOrderStatus
   trackingNumber?: string | null
   courierName?: string | null
+  consignmentId?: string | null
+  courierStatus?: string | null
+  shippedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -839,6 +939,9 @@ export type SubOrderUpdateWithoutOrderInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   store?: Prisma.StoreUpdateOneRequiredWithoutSubOrdersNestedInput
@@ -854,6 +957,9 @@ export type SubOrderUncheckedUpdateWithoutOrderInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutSubOrderNestedInput
@@ -868,6 +974,9 @@ export type SubOrderUncheckedUpdateManyWithoutOrderInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -881,6 +990,9 @@ export type SubOrderCreateManyStoreInput = {
   status?: $Enums.SubOrderStatus
   trackingNumber?: string | null
   courierName?: string | null
+  consignmentId?: string | null
+  courierStatus?: string | null
+  shippedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -893,6 +1005,9 @@ export type SubOrderUpdateWithoutStoreInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   order?: Prisma.OrderUpdateOneRequiredWithoutSubOrdersNestedInput
@@ -908,6 +1023,9 @@ export type SubOrderUncheckedUpdateWithoutStoreInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutSubOrderNestedInput
@@ -922,6 +1040,9 @@ export type SubOrderUncheckedUpdateManyWithoutStoreInput = {
   status?: Prisma.EnumSubOrderStatusFieldUpdateOperationsInput | $Enums.SubOrderStatus
   trackingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   courierName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  consignmentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courierStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shippedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -967,6 +1088,9 @@ export type SubOrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   status?: boolean
   trackingNumber?: boolean
   courierName?: boolean
+  consignmentId?: boolean
+  courierStatus?: boolean
+  shippedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
@@ -985,6 +1109,9 @@ export type SubOrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   trackingNumber?: boolean
   courierName?: boolean
+  consignmentId?: boolean
+  courierStatus?: boolean
+  shippedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
@@ -1001,6 +1128,9 @@ export type SubOrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   trackingNumber?: boolean
   courierName?: boolean
+  consignmentId?: boolean
+  courierStatus?: boolean
+  shippedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
@@ -1017,11 +1147,14 @@ export type SubOrderSelectScalar = {
   status?: boolean
   trackingNumber?: boolean
   courierName?: boolean
+  consignmentId?: boolean
+  courierStatus?: boolean
+  shippedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SubOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "storeId" | "subTotal" | "platformFee" | "vendorEarnings" | "status" | "trackingNumber" | "courierName" | "createdAt" | "updatedAt", ExtArgs["result"]["subOrder"]>
+export type SubOrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "storeId" | "subTotal" | "platformFee" | "vendorEarnings" | "status" | "trackingNumber" | "courierName" | "consignmentId" | "courierStatus" | "shippedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["subOrder"]>
 export type SubOrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
   store?: boolean | Prisma.StoreDefaultArgs<ExtArgs>
@@ -1054,6 +1187,9 @@ export type $SubOrderPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     status: $Enums.SubOrderStatus
     trackingNumber: string | null
     courierName: string | null
+    consignmentId: string | null
+    courierStatus: string | null
+    shippedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["subOrder"]>
@@ -1491,6 +1627,9 @@ export interface SubOrderFieldRefs {
   readonly status: Prisma.FieldRef<"SubOrder", 'SubOrderStatus'>
   readonly trackingNumber: Prisma.FieldRef<"SubOrder", 'String'>
   readonly courierName: Prisma.FieldRef<"SubOrder", 'String'>
+  readonly consignmentId: Prisma.FieldRef<"SubOrder", 'String'>
+  readonly courierStatus: Prisma.FieldRef<"SubOrder", 'String'>
+  readonly shippedAt: Prisma.FieldRef<"SubOrder", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"SubOrder", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SubOrder", 'DateTime'>
 }
